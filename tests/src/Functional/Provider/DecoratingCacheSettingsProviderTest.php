@@ -10,7 +10,7 @@ use Helis\SettingsManagerBundle\Provider\DecoratingRedisSettingsProvider;
 use Helis\SettingsManagerBundle\Provider\DoctrineOrmSettingsProvider;
 use Helis\SettingsManagerBundle\Provider\SettingsProviderInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Lock\Factory;
+use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\Store\FlockStore;
 
 class DecoratingCacheSettingsProviderTest extends DecoratingPredisSettingsProviderTest
@@ -48,7 +48,7 @@ class DecoratingCacheSettingsProviderTest extends DecoratingPredisSettingsProvid
             ),
             $container->get('test.settings_manager.serializer'),
             new FilesystemAdapter($namespace, 0, $cacheDir),
-            new Factory(new FlockStore()),
+            new LockFactory(new FlockStore()),
             0
         );
     }

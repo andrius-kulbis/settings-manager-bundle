@@ -9,7 +9,7 @@ use Helis\SettingsManagerBundle\Model\SettingModel;
 use Helis\SettingsManagerBundle\Settings\Traits\DomainNameExtractTrait;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\CacheItem;
-use Symfony\Component\Lock\Factory;
+use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class DecoratingCacheSettingsProvider implements ModificationAwareSettingsProviderInterface
@@ -27,7 +27,7 @@ class DecoratingCacheSettingsProvider implements ModificationAwareSettingsProvid
     /** @var AdapterInterface */
     private $cache;
 
-    /** @var Factory */
+    /** @var LockFactory */
     private $lockFactory;
 
     /** @var int */
@@ -40,7 +40,7 @@ class DecoratingCacheSettingsProvider implements ModificationAwareSettingsProvid
         ModificationAwareSettingsProviderInterface $decoratingProvider,
         SerializerInterface $serializer,
         AdapterInterface $cache,
-        Factory $lockFactory,
+        LockFactory $lockFactory,
         int $checkValidityInterval = 30
     ) {
         $this->decoratingProvider = $decoratingProvider;
